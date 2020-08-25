@@ -9,13 +9,18 @@ dotenv.config();
 app.set('views', path.join(__dirname, 'component'));
 app.set('view engine', 'ejs');
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
 const baseURL = '/api';
 import users from './component/users/users_router';
+import auth from './component/auth/auth_router';
 app.use(baseURL, users);
+app.use(baseURL, auth);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
