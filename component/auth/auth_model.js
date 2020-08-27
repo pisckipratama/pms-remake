@@ -2,14 +2,14 @@ import connection from '../../lib/config/connection';
 
 const tableUsers = 'td_users';
 
-const loginUserModel = async (email, password, result) => {
-  const queryText = `SELECT email FROM ${tableUsers} WHERE email=$1`;
+const loginUserModel = async (email, result) => {
+  const queryText = `SELECT email, password FROM ${tableUsers} WHERE email=$1`;
   const values = [email];
 
   try {
     const { rows } = await connection.query(queryText, values);
     console.log(rows);
-    result('ok', null);
+    result(rows, null);
   } catch (error) {
     console.error(error);
     result(null, error);

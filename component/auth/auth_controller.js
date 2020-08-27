@@ -1,15 +1,24 @@
 import { loginUserModel } from './auth_model';
 
-const loginUser = async (req, res) => {
+const getLoginPage = (_, res) => {
+  res.render('auth/auth_view', { name: 'Piscki Pratama', title: 'PMS Remake' });
+};
+
+const postLoginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    loginUserModel(email, password, async (result, err) => {
+    loginUserModel(email, (data, err) => {
       if (err) {
         console.log(err);
         return res.status(500).json(err);
       }
-      return res.status(200).json(result);
+      console.log(data, 'ini data di controller');
+      if (data.length < 1 || data[0].password !== password) {
+        return res.redirect('/login');
+      }
+
+      res.redirect('/dashboard');
     });
   } catch (error) {
     console.error(error);
@@ -17,4 +26,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { loginUser };
+export { postLoginUser, getLoginPage };
