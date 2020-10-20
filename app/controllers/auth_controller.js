@@ -1,7 +1,7 @@
-import { loginUserModel } from '../models/auth_model';
+import models from '../models';
 
 const getLoginPage = (_, res) => {
-  res.render('auth/auth_view', { name: 'Piscki Pratama', title: 'PMS Remake' });
+  res.render('views/auth_view', { name: 'Piscki Pratama', title: 'PMS Remake' });
 };
 
 const postLoginUser = async (req, res) => {
