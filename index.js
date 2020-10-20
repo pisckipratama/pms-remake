@@ -17,17 +17,13 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-const baseURL = '/';
-import users from './component/users/users_router';
-import auth from './component/auth/auth_router';
-import dashboard from './component/dashboard/dashboard_router';
-app.use(baseURL, users);
-app.use(baseURL, auth);
-app.use(baseURL, dashboard);
+app.get('/', (req, res) => {
+  const { name } = req.query;
+  if (!name) {
+    return res.send('Hello!');
+  }
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-  console.log(`server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+  return res.send(`Hello ${name}!`)
 });
 
 export default app;

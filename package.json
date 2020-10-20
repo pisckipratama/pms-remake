@@ -4,8 +4,8 @@
   "description": "Remake Project Management System Application",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node -- index",
-    "dev": "nodemon --exec babel-node -- index",
+    "start": "babel-node -- bin/server.js",
+    "dev": "nodemon --exec babel-node -- bin/server.js",
     "test": "export NODE_PATH=./ --compilers js:babel-register --recursive",
     "lint": "eslint"
   },
